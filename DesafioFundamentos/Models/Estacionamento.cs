@@ -1,3 +1,5 @@
+using System.Runtime.CompilerServices;
+
 namespace DesafioFundamentos.Models
 {
     public class Estacionamento
@@ -16,27 +18,47 @@ namespace DesafioFundamentos.Models
         {
             // TODO: Pedir para o usuário digitar uma placa (ReadLine) e adicionar na lista "veiculos"
             // *IMPLEMENTE AQUI*
+            string placa = "";
             Console.WriteLine("Digite a placa do veículo para estacionar:");
+            placa = Console.ReadLine();
+            veiculos.Add(placa);
+            Console.WriteLine("Veículo adicionado");
+                        
         }
 
         public void RemoverVeiculo()
         {
+            string placa = "";
             Console.WriteLine("Digite a placa do veículo para remover:");
 
             // Pedir para o usuário digitar a placa e armazenar na variável placa
             // *IMPLEMENTE AQUI*
-            string placa = "";
 
+            placa = Console.ReadLine();
+            
             // Verifica se o veículo existe
             if (veiculos.Any(x => x.ToUpper() == placa.ToUpper()))
             {
-                Console.WriteLine("Digite a quantidade de horas que o veículo permaneceu estacionado:");
-
-                // TODO: Pedir para o usuário digitar a quantidade de horas que o veículo permaneceu estacionado,
-                // TODO: Realizar o seguinte cálculo: "precoInicial + precoPorHora * horas" para a variável valorTotal                
-                // *IMPLEMENTE AQUI*
                 int horas = 0;
                 decimal valorTotal = 0; 
+
+                Console.WriteLine("Digite a quantidade de horas que o veículo permaneceu estacionado:");
+                // TODO: Pedir para o usuário digitar a quantidade de horas que o veículo permaneceu estacionado,
+                
+                 if (int.TryParse(Console.ReadLine(), out horas))
+                    {
+                        // O valor foi convertido com sucesso
+                        // Agora podemos usar a variável 'horas' como um número inteiro
+                        Console.WriteLine($"Veículo estacionado por {horas} horas.");
+                    }
+                else        
+                {
+                    // A entrada não pôde ser convertida para um número inteiro
+                    Console.WriteLine("Por favor, digite um número válido de horas.");
+                }
+
+                // TODO: Realizar o seguinte cálculo: "precoInicial + precoPorHora * horas" para a variável valorTotal                
+                valorTotal = precoInicial + (horas * precoPorHora);
 
                 // TODO: Remover a placa digitada da lista de veículos
                 // *IMPLEMENTE AQUI*
@@ -56,7 +78,10 @@ namespace DesafioFundamentos.Models
             {
                 Console.WriteLine("Os veículos estacionados são:");
                 // TODO: Realizar um laço de repetição, exibindo os veículos estacionados
-                // *IMPLEMENTE AQUI*
+                foreach (var veiculos in veiculos)
+                {
+                    Console.WriteLine(veiculos);
+                }
             }
             else
             {
